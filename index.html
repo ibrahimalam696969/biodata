@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ibrahim | Creative Tech, Gaming & Complete Story</title>
+    <title>Ibrahim | Complete Story & Interactive Archive</title>
     <style>
         /* THEME VARIABLES */
         :root {
@@ -49,7 +49,8 @@
             display: var(--scanline-display);
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.04));
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.04));
             background-size: 100% 4px, 6px 100%;
             z-index: 99999;
             pointer-events: none;
@@ -86,7 +87,7 @@
             line-height: 1.6;
             color: var(--text-color);
             margin: 0;
-            padding: 40px 20px 60px 20px;
+            padding: 40px 16px 60px 16px;
             background-color: var(--bg-color);
             background-image: radial-gradient(circle at 10% 20%, rgba(121, 40, 202, 0.15) 0%, transparent 40%),
                               radial-gradient(circle at 90% 80%, rgba(0, 242, 254, 0.15) 0%, transparent 40%);
@@ -105,9 +106,9 @@
             color: var(--text-color);
             border: 1px solid var(--glass-border);
             border-radius: 14px;
-            padding: 10px 22px;
+            padding: 10px 20px;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
@@ -129,13 +130,13 @@
         /* DRAGGABLE WIDGETS */
         .draggable-widget {
             position: fixed;
-            width: 58px; height: 58px;
-            background: rgba(20, 24, 38, 0.7);
+            width: 54px; height: 54px;
+            background: rgba(20, 24, 38, 0.75);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             border: 1px solid var(--glass-border);
             border-radius: 50%;
-            font-size: 24px;
+            font-size: 22px;
             display: flex; align-items: center; justify-content: center;
             cursor: pointer;
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
@@ -156,11 +157,11 @@
             box-shadow: 0 0 15px var(--accent-green);
         }
 
-        #gameWidgetBtn { bottom: 25px; right: 25px; }
-        #musicWidgetBtn { bottom: 25px; right: 95px; }
-        #colorWidgetBtn { bottom: 25px; right: 165px; }
+        #gameWidgetBtn { bottom: 25px; right: 20px; }
+        #musicWidgetBtn { bottom: 25px; right: 85px; }
+        #colorWidgetBtn { bottom: 25px; right: 150px; }
 
-        /* MODALS */
+        /* MODAL PANELS */
         .arcade-panel-box {
             position: fixed;
             width: 440px;
@@ -176,9 +177,9 @@
             overflow: hidden;
         }
 
-        #arcadePanel { bottom: 95px; right: 25px; }
-        #musicPanel { bottom: 95px; right: 75px; }
-        #colorPanel { bottom: 95px; right: 125px; width: 380px; }
+        #arcadePanel { bottom: 95px; right: 20px; }
+        #musicPanel { bottom: 95px; right: 60px; }
+        #colorPanel { bottom: 95px; right: 100px; width: 380px; }
 
         .arcade-panel-box.show {
             display: block;
@@ -202,11 +203,7 @@
             letter-spacing: 0.5px;
         }
 
-        .panel-header-actions {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+        .panel-header-actions { display: flex; align-items: center; gap: 8px; }
 
         .panel-ui-close {
             background: rgba(255, 255, 255, 0.1);
@@ -401,7 +398,7 @@
         }
         #guestSpotifyPlayer { border: none; width: 100%; height: 100%; }
 
-        /* CARDS */
+        /* CARDS & CONTAINERS */
         .project-card, .timeline-item, blockquote, footer, .info-panel { 
             background: var(--glass-card-bg);
             backdrop-filter: blur(var(--glass-blur));
@@ -427,8 +424,8 @@
 
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 15px; margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px; margin-top: 20px;
         }
 
         .skill-tag {
@@ -442,31 +439,37 @@
             border-radius: 14px;
         }
 
-        /* PHOTO DISPLAY & FACE BLUR */
+        /* HARDWARE-ACCELERATED ASYNC IMAGE WRAPPER */
         .photo-wrapper {
             position: relative;
-            display: inline-block;
+            display: block;
             width: 100%;
             margin-top: 15px;
             border-radius: 16px;
             overflow: hidden;
             line-height: 0;
+            background: rgba(0, 0, 0, 0.3);
+            contain: layout paint;
         }
 
         .photo-wrapper img {
             width: 100%;
             height: auto;
+            max-height: 80vh;
+            object-fit: contain;
             border-radius: 16px;
             border: 1px solid var(--glass-border);
             filter: invert(var(--invert-val));
             display: block;
+            transition: opacity 0.3s ease;
         }
 
+        /* FACE BLUR MASK */
         .blur-face-mask {
             position: absolute;
-            backdrop-filter: blur(28px) saturate(1.8);
-            -webkit-backdrop-filter: blur(28px) saturate(1.8);
-            background: rgba(20, 24, 38, 0.55);
+            backdrop-filter: blur(24px) saturate(1.8);
+            -webkit-backdrop-filter: blur(24px) saturate(1.8);
+            background: rgba(15, 18, 30, 0.55);
             border: 2px dashed var(--accent-pink);
             border-radius: 50%;
             cursor: pointer;
@@ -474,7 +477,7 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(255, 0, 127, 0.6);
+            box-shadow: 0 0 18px rgba(255, 0, 127, 0.6);
             z-index: 10;
         }
 
@@ -536,7 +539,7 @@
             background: var(--glass-card-bg);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
-            padding: 28px;
+            padding: 26px;
             width: 320px;
             max-width: 90%;
             text-align: center;
@@ -563,11 +566,7 @@
             box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
         }
 
-        .modal-btn-row {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
+        .modal-btn-row { display: flex; gap: 10px; justify-content: center; }
 
         h1 {
             font-size: 2.8rem;
@@ -604,26 +603,43 @@
         .chapter-heading {
             font-size: 1.35rem;
             color: var(--accent-cyan);
-            margin-top: 40px;
-            margin-bottom: 10px;
+            margin-top: 45px;
+            margin-bottom: 15px;
             border-left: 4px solid var(--accent-cyan);
             padding-left: 12px;
             letter-spacing: 0.5px;
+        }
+
+        /* MOBILE PERF OPTIMIZATION */
+        @media (max-width: 768px) {
+            body { padding: 25px 12px 60px 12px; }
+            h1 { font-size: 2.2rem; }
+            .blur-face-mask {
+                backdrop-filter: blur(12px) !important;
+                -webkit-backdrop-filter: blur(12px) !important;
+            }
+            .project-card, .timeline-item {
+                backdrop-filter: blur(8px) !important;
+                -webkit-backdrop-filter: blur(8px) !important;
+                padding: 16px;
+            }
+            .arcade-panel-box { width: calc(100% - 24px); }
+            #arcadePanel, #musicPanel, #colorPanel { right: 12px; left: 12px; width: auto; }
         }
     </style>
 </head>
 <body>
 
-    <!-- FULLSCREEN ANIMATION BACKGROUND CANVAS -->
+    <!-- BACKGROUND CANVAS -->
     <canvas id="bgCanvas"></canvas>
     <div class="crt-overlay"></div>
 
-    <!-- FLOATING ACTION WIDGETS -->
+    <!-- FLOATING WIDGETS -->
     <div id="colorWidgetBtn" class="draggable-widget" title="Toggle FX & Background [Key: C]">🎨</div>
     <div id="musicWidgetBtn" class="draggable-widget" title="Toggle Spotify Music [Key: M]">🎵</div>
     <div id="gameWidgetBtn" class="draggable-widget" title="Toggle Arcade Hub [Key: G]">🎮</div>
 
-    <!-- 1. COLOR & ANIMATION ENGINE POPUP PANEL -->
+    <!-- 1. COLOR & ANIMATION ENGINE -->
     <div id="colorPanel" class="arcade-panel-box" onclick="focusPanel(this)">
         <div class="panel-ui-header" id="colorHeader">
             <span>🎨 FX & COLOR_CORE.EXE</span>
@@ -639,13 +655,13 @@
 
             <p style="font-size: 0.82rem; font-weight: bold; opacity: 0.9; margin: 6px 0 0 0;">Dynamic Animated Backgrounds:</p>
             <div class="swatches-grid">
-                <button class="swatch-btn" onclick="startBgAnimation('matrix')">💻 Green Binary Hacker</button>
-                <button class="swatch-btn" onclick="startBgAnimation('coins')">🪙 Falling Gold Coins</button>
-                <button class="swatch-btn" onclick="startBgAnimation('rain')">🌧️ Cyber Storm Rain</button>
-                <button class="swatch-btn" onclick="startBgAnimation('cars')">🏎️ Night Highway Cars</button>
-                <button class="swatch-btn" onclick="startBgAnimation('sea')">🌊 Deep Ocean Waves</button>
+                <button class="swatch-btn" onclick="startBgAnimation('matrix')">💻 Green Hacker</button>
+                <button class="swatch-btn" onclick="startBgAnimation('coins')">🪙 Falling Coins</button>
+                <button class="swatch-btn" onclick="startBgAnimation('rain')">🌧️ Storm Rain</button>
+                <button class="swatch-btn" onclick="startBgAnimation('cars')">🏎️ Night Highway</button>
+                <button class="swatch-btn" onclick="startBgAnimation('sea')">🌊 Ocean Waves</button>
                 <button class="swatch-btn" onclick="startBgAnimation('rocket')">🚀 Rocket Launch</button>
-                <button class="swatch-btn" onclick="applyColor('rgb')">✨ Smooth RGB Shift</button>
+                <button class="swatch-btn" onclick="applyColor('rgb')">✨ RGB Shift</button>
                 <button class="swatch-btn" style="border-color: #ff0055;" onclick="stopBgAnimation()">❌ Clear Animations</button>
             </div>
             
@@ -701,7 +717,7 @@
         </div>
     </div>
 
-    <!-- 3. SPOTIFY MUSIC PANEL -->
+    <!-- 3. SPOTIFY PANEL -->
     <div id="musicPanel" class="arcade-panel-box" onclick="focusPanel(this)">
         <div class="panel-ui-header" id="musicHeader">
             <span>🎵 SPOTIFY_FLOW.WAV</span>
@@ -726,11 +742,11 @@
         </div>
     </div>
 
-    <!-- PASSWORD MODAL DIALOG (CODE: 25801) -->
+    <!-- PASSWORD MODAL (PIN: 25801) -->
     <div id="passwordModal" class="password-modal-overlay">
         <div class="password-modal-card">
             <h3 style="margin: 0 0 8px 0;">🔒 Protected Face</h3>
-            <p style="font-size: 0.85rem; opacity: 0.8; margin: 0;">Enter security code to unmask:</p>
+            <p style="font-size: 0.85rem; opacity: 0.8; margin: 0;">Enter security code to reveal faces:</p>
             <input type="password" id="passInput" placeholder="•••••" maxlength="10" autocomplete="off">
             <div class="modal-btn-row">
                 <button class="glass-btn" onclick="checkUnlockPass()">Unlock</button>
@@ -763,14 +779,14 @@
                 <div class="info-row"><strong>Role:</strong> <span>Student & Tech Explorer</span></div>
                 <div class="info-row"><strong>Base Station:</strong> <span>Bihar, India 🇮🇳</span></div>
                 <div class="info-row"><strong>Favorite Games:</strong> <span>Free Fire, GTA, Arcade 🎮</span></div>
-                <div class="info-row"><strong>Focus:</strong> <span>Design, Interactive UI, Creative Building ⚙️</span></div>
-                <div class="info-row"><strong>Privacy Protocol:</strong> <span>Active (Passcode Locked Faces)</span></div>
+                <div class="info-row"><strong>Focus:</strong> <span>Design, Interactive Web, Exploration ⚙️</span></div>
+                <div class="info-row"><strong>Privacy Protocol:</strong> <span>Active (Passcode Protected Female Faces)</span></div>
             </div>
 
             <!-- HERO PHOTO -->
             <div style="margin: 35px 0;">
                 <div class="photo-wrapper">
-                    <img src="IMG_20260225_150531614.jpg" alt="Ibrahim portrait looking out window in sunlight">
+                    <img src="IMG_20260225_150531614.jpg" alt="Ibrahim portrait looking out window in sunlight" loading="eager" decoding="async">
                 </div>
                 <p style="font-size: 0.85rem; text-align: center; opacity: 0.8; margin-top: 10px;">^ Focus mode on: looking forward to bigger horizons.</p>
             </div>
@@ -826,41 +842,41 @@
             <div class="chapter-heading">🌱 Chapter 1: The Early Days & Milestones</div>
             <div class="timeline">
                 <div class="timeline-item">
-                    <h3>1. Earliest Memory (G3bMyKzuRDeQBMlGWiCHUrPBMzW.webp)</h3>
+                    <h3>1. Earliest Memory</h3>
                     <div class="photo-wrapper">
-                        <img src="G3bMyKzuRDeQBMlGWiCHUrPBMzW.webp" alt="Baby toddler memory">
+                        <img src="G3bMyKzuRDeQBMlGWiCHUrPBMzW.webp" alt="Baby toddler memory" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Where the entire story started.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>2. The Childhood Portrait (2.jpg)</h3>
+                    <h3>2. The Childhood Portrait</h3>
                     <div class="photo-wrapper">
-                        <img src="2.jpg" alt="Ibrahim childhood portrait">
+                        <img src="2.jpg" alt="Ibrahim childhood portrait" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>The focused, classic childhood portrait.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>3. Early Milestones (1780459945423.png)</h3>
+                    <h3>3. Early Milestones</h3>
                     <div class="photo-wrapper">
-                        <img src="1780459945423.png" alt="Early portrait photo">
+                        <img src="1780459945423.png" alt="Early portrait photo" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Growing up observant and curious about the world.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>4. Rooftop Garden Days (IMG_20220722_175718.jpg)</h3>
+                    <h3>4. Terrace Garden Days</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20220722_175718.jpg" alt="Rooftop garden portrait">
+                        <img src="IMG_20220722_175718.jpg" alt="Rooftop garden portrait" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Striking a pose among terrace plants on a breezy evening.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>5. Ferrari Colors in the Garden (IMG_20220722_175853.jpg)</h3>
+                    <h3>5. Ferrari Colors in the Garden</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20220722_175853.jpg" alt="Ferrari shirt rooftop portrait">
+                        <img src="IMG_20220722_175853.jpg" alt="Ferrari shirt rooftop portrait" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Classic garden memories and warm afternoons.</em></p>
                 </div>
@@ -870,25 +886,26 @@
             <div class="chapter-heading">🕌 Chapter 2: Tradition, Heritage & Family Roots</div>
             <div class="timeline">
                 <div class="timeline-item">
-                    <h3>6. Festive Kurta Celebration (IMG_20200409_210342.jpg)</h3>
+                    <h3>6. Festive Kurta Celebration</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20200409_210342.jpg" alt="Traditional white kurta gathering">
+                        <img src="IMG_20200409_210342.jpg" alt="Traditional white kurta gathering" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Dressed in traditional white attire for festive prayer at home.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>7. Family Legacy (IMG_20220513_113133.webp)</h3>
+                    <h3>7. Family Legacy</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20220513_113133.webp" alt="Posing with elders and little brother">
+                        <img src="IMG_20220513_113133.webp" alt="Posing with elders and little brother" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Respecting heritage, family roots, and older generations.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>8. Family Gathering at the Park (1.jpg)</h3>
+                    <h3>8. Family Gathering at the Park (Protected)</h3>
                     <div class="photo-wrapper">
-                        <img src="1.jpg" alt="Family gathering park photo">
+                        <img src="1.jpg" alt="Family gathering park photo" loading="lazy" decoding="async">
+                        <!-- Female face blur overlays -->
                         <div class="blur-face-mask" title="Click to unlock face" onclick="openUnlockModal(this)" style="top: 31%; left: 14%; width: 5.5%; height: 9.5%;"></div>
                         <div class="blur-face-mask" title="Click to unlock face" onclick="openUnlockModal(this)" style="top: 23%; left: 45.2%; width: 5.2%; height: 9.5%;"></div>
                         <div class="blur-face-mask" title="Click to unlock face" onclick="openUnlockModal(this)" style="top: 22.5%; left: 53.5%; width: 5.8%; height: 10.5%;"></div>
@@ -898,18 +915,18 @@
                 </div>
 
                 <div class="timeline-item">
-                    <h3>9. Historic Memorial Visit (IMG_20231219_125619.jpg)</h3>
+                    <h3>9. Historic Memorial Visit (Protected)</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20231219_125619.jpg" alt="Victoria Memorial monument visit">
+                        <img src="IMG_20231219_125619.jpg" alt="Victoria Memorial monument visit" loading="lazy" decoding="async">
                         <div class="blur-face-mask" title="Click to unlock face" onclick="openUnlockModal(this)" style="top: 71%; left: 62.3%; width: 7.8%; height: 11.5%;"></div>
                     </div>
                     <p style="margin-top: 10px;"><em>Visiting the Victoria Memorial in Kolkata with family.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>10. Grand Marble Pillars (phoneImageCapture1772342870339.jpg)</h3>
+                    <h3>10. Grand Marble Pillars (Protected)</h3>
                     <div class="photo-wrapper">
-                        <img src="phoneImageCapture1772342870339.jpg" alt="Standing beneath grand marble arches">
+                        <img src="phoneImageCapture1772342870339.jpg" alt="Standing beneath grand marble arches" loading="lazy" decoding="async">
                         <div class="blur-face-mask" title="Click to unlock face" onclick="openUnlockModal(this)" style="top: 52%; left: 34.5%; width: 5.5%; height: 9.5%;"></div>
                         <div class="blur-face-mask" title="Click to unlock face" onclick="openUnlockModal(this)" style="top: 59%; left: 67%; width: 3.5%; height: 6.5%;"></div>
                     </div>
@@ -921,57 +938,57 @@
             <div class="chapter-heading">🤝 Chapter 3: Brothers, Sibling Bonds & City Days</div>
             <div class="timeline">
                 <div class="timeline-item">
-                    <h3>11. Sibling Bond Indoors (IMG_20220608_193806.webp)</h3>
+                    <h3>11. Sibling Bond Indoors</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20220608_193806.webp" alt="Brothers sitting together indoors">
+                        <img src="IMG_20220608_193806.webp" alt="Brothers sitting together indoors" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Growing up together with positive energy.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>12. The Laptop Screen Clan (IMG_20250928_174213835.jpg)</h3>
+                    <h3>12. The Laptop Screen Clan</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20250928_174213835.jpg" alt="Kids gathered around laptop">
+                        <img src="IMG_20250928_174213835.jpg" alt="Kids gathered around laptop" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Gaming, learning, and sharing the computer screen.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>13. Squad on the Street (file_00000000ff6471f8aa55db5780d66524.png)</h3>
+                    <h3>13. Squad on the Street</h3>
                     <div class="photo-wrapper">
-                        <img src="file_00000000ff6471f8aa55db5780d66524.png" alt="Three young brothers with arms around each other">
+                        <img src="file_00000000ff6471f8aa55db5780d66524.png" alt="Three young brothers with arms around each other" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>The brother trio standing united and cheerful.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>14. City Walk with Father (IMG_20251110_202439220.jpg)</h3>
+                    <h3>14. City Walk with Father</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20251110_202439220.jpg" alt="Holding hands with father at night">
+                        <img src="IMG_20251110_202439220.jpg" alt="Holding hands with father at night" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Evening strolls hand in hand under the street lights.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>15. Neon Night Glow (IMG_20251110_202620218.jpg)</h3>
+                    <h3>15. Neon Night Glow</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20251110_202620218.jpg" alt="Illuminated by blue city lights">
+                        <img src="IMG_20251110_202620218.jpg" alt="Illuminated by blue city lights" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Illuminated by vibrant blue neon street festival lights.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>16. City Promenade (IMG_20250225_112657.jpg)</h3>
+                    <h3>16. City Promenade</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20250225_112657.jpg" alt="Outdoor city square walk">
+                        <img src="IMG_20250225_112657.jpg" alt="Outdoor city square walk" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Sunny stroll through Mahakal square.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>17. Plaza Steps (IMG-20251011-WA0009.jpg)</h3>
+                    <h3>17. Brothers on the Plaza Steps</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG-20251011-WA0009.jpg" alt="Three brothers on plaza stone steps">
+                        <img src="IMG-20251011-WA0009.jpg" alt="Three brothers on plaza stone steps" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Standing side-by-side with brothers in travel jackets.</em></p>
                 </div>
@@ -981,67 +998,67 @@
             <div class="chapter-heading">🏔️ Chapter 4: Expeditions, Summits & Open Waters</div>
             <div class="timeline">
                 <div class="timeline-item">
-                    <h3>18. Rock Boulder Summit (IMG_20250226_130924.jpg)</h3>
+                    <h3>18. Rock Boulder Summit</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20250226_130924.jpg" alt="Standing on boulder on lush hillside">
+                        <img src="IMG_20250226_130924.jpg" alt="Standing on boulder on lush hillside" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Climbing the rocky mountain slopes surrounded by moss and forest.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>19. Chasing Waterfalls (IMG_20250226_135511.jpg)</h3>
+                    <h3>19. Chasing Waterfalls</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20250226_135511.jpg" alt="Fresh waterfall stream against mountain rock">
+                        <img src="IMG_20250226_135511.jpg" alt="Fresh waterfall stream against mountain rock" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Cool mountain spring water running down the stone face.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>20. Valley Panorama Balcony (IMG_20250226_132415.jpg)</h3>
+                    <h3>20. Valley Panorama Balcony</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20250226_132415.jpg" alt="Overlooking green mountain valley with father and brother">
+                        <img src="IMG_20250226_132415.jpg" alt="Overlooking green mountain valley with father and brother" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Looking out across the sprawling mountain horizon with family.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>21. Himalayan Snow Peak View (ChatGPT Image Sep 16, 2026, 11_17_26 AM.png)</h3>
+                    <h3>21. Morning Hill Station Overlook</h3>
                     <div class="photo-wrapper">
-                        <img src="ChatGPT Image Sep 16, 2026, 11_17_26 AM.png" alt="Snow mountains panorama backdrop">
+                        <img src="IMG_20250226_063328.jpg" alt="Early morning rooftop view with family" loading="lazy" decoding="async">
                     </div>
-                    <p style="margin-top: 10px;"><em>Pristine blue skies and distant snowy Himalayan ranges.</em></p>
+                    <p style="margin-top: 10px;"><em>Chilly morning views overlooking the hillside settlement.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>22. Pagoda Courtyard (ChatGPT Image Sep 16, 2026, 11_14_37 AM.png)</h3>
+                    <h3>22. Mountain Monastery Courtyard (Protected)</h3>
                     <div class="photo-wrapper">
-                        <img src="ChatGPT Image Sep 16, 2026, 11_14_37 AM.png" alt="Mountain monastery courtyard with prayer flags">
+                        <img src="ChatGPT%20Image%20Sep%2016%2C%202026%2C%2011_14_37%20AM.png" alt="Mountain monastery courtyard with prayer flags" loading="lazy" decoding="async">
                         <div class="blur-face-mask" title="Click to unlock face" onclick="openUnlockModal(this)" style="top: 31%; left: 25.2%; width: 2.8%; height: 5.5%;"></div>
                     </div>
                     <p style="margin-top: 10px;"><em>Checkerboard courtyard with prayer flags and temple architecture.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>23. Giant Leaf Seats (IMG_20250225_135311.jpg)</h3>
+                    <h3>23. Giant Leaf Benches</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20250225_135311.jpg" alt="Sitting on giant leaf garden chairs">
+                        <img src="IMG_20250225_135311.jpg" alt="Sitting on giant leaf garden chairs" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Resting on creative giant leaf benches in the public park.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>24. Calm Lake Waterfront (IMG_20251005_171714831.jpg)</h3>
+                    <h3>24. Calm Lake Waterfront (Protected)</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20251005_171714831.jpg" alt="Three kids standing by quiet lake">
+                        <img src="IMG_20251005_171714831.jpg" alt="Three kids standing by quiet lake" loading="lazy" decoding="async">
                         <div class="blur-face-mask" title="Click to unlock face" onclick="openUnlockModal(this)" style="top: 38%; left: 45.8%; width: 10%; height: 16%;"></div>
                     </div>
-                    <p style="margin-top: 10px;"><em>Quiet autumn afternoon along the lakeside reservoir.</em></p>
+                    <p style="margin-top: 10px;"><em>Quiet autumn afternoon along the lakeside reservoir (Female face protected).</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>25. Autumn White Reeds (IMG_20251005_172603548.jpg)</h3>
+                    <h3>25. Autumn White Reeds</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20251005_172603548.jpg" alt="Sitting among tall blooming white kash phul">
+                        <img src="IMG_20251005_172603548.jpg" alt="Sitting among tall blooming white kash phul" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Surrounded by blooming white wild reeds in full season.</em></p>
                 </div>
@@ -1051,126 +1068,126 @@
             <div class="chapter-heading">🚆 Chapter 5: Steel Bridges, Trains & Metro Journeys</div>
             <div class="timeline">
                 <div class="timeline-item">
-                    <h3>26. Train Refreshment (IMG_20251017_172642833.jpg)</h3>
+                    <h3>26. Train Journey Refreshment (Protected)</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20251017_172642833.jpg" alt="Inside train cabin holding soda bottle">
+                        <img src="IMG_20251017_172642833.jpg" alt="Inside train cabin holding soda bottle" loading="lazy" decoding="async">
                         <div class="blur-face-mask" title="Click to unlock face" onclick="openUnlockModal(this)" style="top: 18%; left: 1%; width: 14%; height: 18%;"></div>
                     </div>
                     <p style="margin-top: 10px;"><em>Exciting train journey on the tracks.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>27. Facing the Cantilever Bridge (IMG_20251126_135407160.jpg)</h3>
+                    <h3>27. Facing the Cantilever Bridge</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20251126_135407160.jpg" alt="Arms crossed in green sweatshirt before Howrah Bridge">
+                        <img src="IMG_20251126_135407160.jpg" alt="Arms crossed in green sweatshirt before Howrah Bridge" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Standing confident on the riverfront with the steel bridge in the background.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>28. Steel Girders Overhead (IMG_20251128_093918717.jpg)</h3>
+                    <h3>28. Steel Girders Overhead</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20251128_093918717.jpg" alt="Under the trusses of Howrah bridge">
+                        <img src="IMG_20251128_093918717.jpg" alt="Under the trusses of Howrah bridge" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Directly beneath the massive steel superstructure on a clear morning.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>29. Outside Howrah Railway Station (IMG_20251128_094136808.jpg)</h3>
+                    <h3>29. Outside Howrah Railway Station</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20251128_094136808.jpg" alt="Standing with father outside busy Howrah station">
+                        <img src="IMG_20251128_094136808.jpg" alt="Standing with father outside busy Howrah station" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Exploring the bustling avenues outside the historic railway station.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>30. Big Brother Sibling Selfie (IMG_20251128_210534159.jpg)</h3>
+                    <h3>30. Big Brother Sibling Selfie</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20251128_210534159.jpg" alt="Close selfie with older brother">
+                        <img src="IMG_20251128_210534159.jpg" alt="Close selfie with older brother" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Snapping quick selfies with big brother after evening travels.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>31. Pure Mischief! (IMG_20251128_210602325.jpg)</h3>
+                    <h3>31. Pure Mischief!</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20251128_210602325.jpg" alt="Playful silly face with tongue out">
+                        <img src="IMG_20251128_210602325.jpg" alt="Playful silly face with tongue out" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Never a dull moment—bringing the funny, playful energy every time.</em></p>
                 </div>
             </div>
 
-            <!-- CHAPTER 6: MOMENTS, DREAMS & CELEBRATIONS -->
+            <!-- CHAPTER 6: STYLE, CARS & CELEBRATIONS -->
             <div class="chapter-heading">✨ Chapter 6: Style, Cars, Birthdays & Celebrations</div>
             <div class="timeline">
                 <div class="timeline-item">
-                    <h3>32. By the Highway Truck (Screenshot_20260522-215612.jpg)</h3>
+                    <h3>32. By the Highway Truck</h3>
                     <div class="photo-wrapper">
-                        <img src="Screenshot_20260522-215612.jpg" alt="Ibrahim in light blue embroidered kurta standing in front of colorful truck">
+                        <img src="Screenshot_20260522-215612.jpg" alt="Ibrahim in light blue embroidered kurta standing in front of colorful truck" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Roadside stop dressed in festive embroidered blue kurta.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>33. Luxury Wheels (IMG_20251127_135608377.jpg)</h3>
+                    <h3>33. Luxury Wheels</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20251127_135608377.jpg" alt="Posing with a black Mercedes Benz car">
+                        <img src="IMG_20251127_135608377.jpg" alt="Posing with a black Mercedes Benz car" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Checking out luxury engineering and high-performance rides.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>34. Commando Mission (IMG_20260814_215248071.jpg)</h3>
+                    <h3>34. Commando Mission</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20260814_215248071.jpg" alt="Aiming toy rifle in army commando uniform">
+                        <img src="IMG_20260814_215248071.jpg" alt="Aiming toy rifle in army commando uniform" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Full camouflage commando gear, ready to lead the squad!</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>35. The Cash Count Strategist (IMG_20250922_220409924.jpg)</h3>
+                    <h3>35. The Cash Count Strategist</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20250922_220409924.jpg" alt="Thoughtfully holding fan of banknotes">
+                        <img src="IMG_20250922_220409924.jpg" alt="Thoughtfully holding fan of banknotes" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Counting up earnings and planning out the next venture.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>36. Golden Hour Sunset in Black (IMG_20251205_160508260.jpg)</h3>
+                    <h3>36. Golden Hour Sunset in Black</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20251205_160508260.jpg" alt="Black embroidered kurta under sunset sun">
+                        <img src="IMG_20251205_160508260.jpg" alt="Black embroidered kurta under sunset sun" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Sharp black embroidery under the warm golden evening sun.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>37. Warm Winter Fire (Picsart_26-01-15_11-28-09-707.jpg)</h3>
+                    <h3>37. Warm Winter Fire</h3>
                     <div class="photo-wrapper">
-                        <img src="Picsart_26-01-15_11-28-09-707.jpg" alt="Sitting smiling beside a warm outdoor winter campfire">
+                        <img src="Picsart_26-01-15_11-28-09-707.jpg" alt="Sitting smiling beside a warm outdoor winter campfire" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Warming up by the glowing crackling fire on a chilly winter night.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>38. Birthday Celebration Cake (IMG_20251209_203812355.jpg)</h3>
+                    <h3>38. Birthday Celebration Cake</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20251209_203812355.jpg" alt="Smiling behind chocolate sprinkle birthday cake">
+                        <img src="IMG_20251209_203812355.jpg" alt="Smiling behind chocolate sprinkle birthday cake" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Making wishes and cutting the chocolate birthday cake.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>39. Sunny Terrace Laughs (IMG_20251004_152517798.jpg)</h3>
+                    <h3>39. Sunny Terrace Laughs</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20251004_152517798.jpg" alt="Smiling and shielding face with hand on rooftop terrace">
+                        <img src="IMG_20251004_152517798.jpg" alt="Smiling and shielding face with hand on rooftop terrace" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Shading the bright sun and enjoying laughs up on the roof.</em></p>
                 </div>
 
                 <div class="timeline-item">
-                    <h3>40. The Mirror Reflection (IMG_20250726_181143 (1).jpg)</h3>
+                    <h3>40. The Mirror Reflection</h3>
                     <div class="photo-wrapper">
-                        <img src="IMG_20250726_181143 (1).jpg" alt="Standing in front of mirror surface with double reflection">
+                        <img src="IMG_20250726_181143%20%281%29.jpg" alt="Standing in front of mirror surface with double reflection" loading="lazy" decoding="async">
                     </div>
                     <p style="margin-top: 10px;"><em>Double vision and creative symmetry indoors.</em></p>
                 </div>
@@ -1207,6 +1224,7 @@
         function checkUnlockPass() {
             const entered = document.getElementById("passInput").value.trim();
             if (entered === UNLOCK_PIN) {
+                // Global unlock across all masked images
                 document.querySelectorAll('.blur-face-mask').forEach(m => {
                     m.classList.add('unlocked');
                     m.removeAttribute('title');
@@ -1288,7 +1306,7 @@
         // COINS
         let coins = [];
         function initCoinsEffect() {
-            coins = Array.from({ length: 45 }, () => ({
+            coins = Array.from({ length: 40 }, () => ({
                 x: Math.random() * bgCanvas.width,
                 y: Math.random() * bgCanvas.height,
                 radius: Math.random() * 8 + 10,
@@ -1323,7 +1341,7 @@
         // RAIN
         let raindrops = [];
         function initRainEffect() {
-            raindrops = Array.from({ length: 120 }, () => ({
+            raindrops = Array.from({ length: 80 }, () => ({
                 x: Math.random() * bgCanvas.width,
                 y: Math.random() * bgCanvas.height,
                 length: Math.random() * 20 + 15,
@@ -1356,7 +1374,7 @@
         // CARS
         let highwayCars = [];
         function initCarsEffect() {
-            highwayCars = Array.from({ length: 15 }, () => ({
+            highwayCars = Array.from({ length: 12 }, () => ({
                 x: Math.random() * bgCanvas.width,
                 y: bgCanvas.height - (Math.random() * 70 + 40),
                 speed: (Math.random() * 8 + 6) * (Math.random() > 0.5 ? 1 : -1),
@@ -1427,7 +1445,7 @@
         function initRocketEffect() {
             rocket.x = bgCanvas.width * 0.85;
             rocket.y = bgCanvas.height + 50;
-            stars = Array.from({ length: 60 }, () => ({
+            stars = Array.from({ length: 45 }, () => ({
                 x: Math.random() * bgCanvas.width,
                 y: Math.random() * bgCanvas.height,
                 size: Math.random() * 2
@@ -1478,7 +1496,7 @@
             drawRocket();
         }
 
-        /* 3. COLOR CONTROLLER */
+        /* 3. COLOR SWATCH CONTROLLER */
         const searchInput = document.getElementById('colorSearchInput');
 
         function applyColor(val) {
@@ -1958,7 +1976,7 @@
             }
         }
 
-        /* 7. GLOBAL KEY SHORTCUTS */
+        /* 7. KEYBOARD SHORTCUTS */
         document.addEventListener('keydown', (e) => {
             if (e.target.tagName === 'INPUT') return;
             const key = e.key.toLowerCase();
