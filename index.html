@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ibrahim | Creative Tech, Gaming & Showcase</title>
+    <title>Ibrahim | Creative Tech, Gaming & Complete Showcase</title>
 
-    <!-- PRELOAD HIGH PRIORITY ASSETS -->
+    <!-- IN-MEMORY PARALLEL IMAGE PRELOADERS -->
     <link rel="preload" as="image" href="IMG_20260225_150531614.jpg">
     <link rel="preload" as="image" href="2.jpg">
+    <link rel="preload" as="image" href="IMG_20251205_160508260.jpg">
+    <link rel="preload" as="image" href="Screenshot_20260522-215612.jpg">
 
     <style>
-        /* VARIABLES FOR DARK/LIGHT / THEMES */
+        /* THEME VARIABLES */
         :root {
             --bg-color: #0d0f18;
             --text-color: #f3f4f6;
@@ -40,30 +42,28 @@
             --scanline-display: block;
         }
 
-        /* FULLSCREEN BACKGROUND ANIMATION CANVAS */
+        /* BACKGROUND ENGINE */
         #bgCanvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
             z-index: -2;
             pointer-events: none;
             display: none;
+            transform: translateZ(0);
         }
 
-        /* CRT SCANLINE SHIELD EFFECT */
         .crt-overlay {
             display: var(--scanline-display);
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.04));
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.04));
             background-size: 100% 4px, 6px 100%;
             z-index: 99999;
             pointer-events: none;
         }
 
-        /* RGB ANIMATED BACKGROUND */
         @keyframes rgbCanvasAnimation {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -95,7 +95,7 @@
             line-height: 1.6;
             color: var(--text-color);
             margin: 0;
-            padding: 40px 20px 60px 20px;
+            padding: 40px 16px 60px 16px;
             background-color: var(--bg-color);
             background-image: radial-gradient(circle at 10% 20%, rgba(121, 40, 202, 0.15) 0%, transparent 40%),
                               radial-gradient(circle at 90% 80%, rgba(0, 242, 254, 0.15) 0%, transparent 40%);
@@ -169,7 +169,7 @@
         #musicWidgetBtn { bottom: 25px; right: 95px; }
         #colorWidgetBtn { bottom: 25px; right: 165px; }
 
-        /* MODAL GLASS PANELS */
+        /* MODALS */
         .arcade-panel-box {
             position: fixed;
             width: 440px;
@@ -211,11 +211,7 @@
             letter-spacing: 0.5px;
         }
 
-        .panel-header-actions {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+        .panel-header-actions { display: flex; align-items: center; gap: 8px; }
 
         .panel-ui-close {
             background: rgba(255, 255, 255, 0.1);
@@ -412,7 +408,7 @@
         }
         #guestSpotifyPlayer { border: none; width: 100%; height: 100%; }
 
-        /* GLASS CONTENT CARDS */
+        /* GLASS CARDS */
         .project-card, .timeline-item, blockquote, footer, .info-panel { 
             background: var(--glass-card-bg);
             backdrop-filter: blur(var(--glass-blur));
@@ -440,8 +436,8 @@
 
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 15px; margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px; margin-top: 20px;
         }
 
         .skill-tag {
@@ -455,7 +451,7 @@
             border-radius: 14px;
         }
 
-        /* HARDWARE ACCELERATED PHOTO WRAPPER */
+        /* FAST HARDWARE ACCELERATED PHOTO WRAPPER */
         .photo-wrapper {
             position: relative;
             display: block;
@@ -531,7 +527,7 @@
             color: var(--accent-pink);
         }
 
-        /* MOBILE OPTIMIZATION */
+        /* MOBILE PERF */
         @media (max-width: 768px) {
             body { padding: 25px 12px 60px 12px; }
             h1 { font-size: 2.2rem; }
@@ -547,7 +543,7 @@
 </head>
 <body>
 
-    <!-- FULLSCREEN BACKGROUND CANVAS -->
+    <!-- BACKGROUND CANVAS -->
     <canvas id="bgCanvas"></canvas>
     <div class="crt-overlay"></div>
 
@@ -575,4 +571,4 @@
                 <button class="swatch-btn" onclick="startBgAnimation('matrix')">💻 Green Binary Hacker</button>
                 <button class="swatch-btn" onclick="startBgAnimation('coins')">🪙 Falling Gold Coins</button>
                 <button class="swatch-btn" onclick="startBgAnimation('rain')">🌧️ Cyber Storm Rain</button>
-                <button class="swatch-btn" onclick="startBgAnimation('cars')
+                <button class="swatch-btn" onclick="startBgAnimation('car
